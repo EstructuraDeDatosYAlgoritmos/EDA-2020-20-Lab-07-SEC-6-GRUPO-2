@@ -37,8 +37,7 @@ operación seleccionada.
 #  Ruta a los archivos
 # ___________________________________________________
 
-
-crimefile = 'crime-utf8.csv'
+accidentsfile = 'us_accidents_small.csv'
 
 # ___________________________________________________
 #  Menu principal
@@ -51,8 +50,8 @@ def printMenu():
     print("Bienvenido")
     print("1- Inicializar Analizador")
     print("2- Cargar información de accidentes")
-    print("3- Requerimento 1")
-    print("4- Requerimento 2")
+    print("3- Consultar los accidentes en una fecha dada")
+    print("4- Requerimiento 2")
     print("0- Salir")
     print("*******************************************")
 
@@ -70,15 +69,35 @@ while True:
         cont = controller.init()
 
     elif int(inputs[0]) == 2:
-        print("\nCargando información de crimenes ....")
+        print("\nCargando información de accidentes....")
+        controller.loadData(cont, accidentsfile)
+        print('\nAccidentes cargados: ' + str(controller.accidentsSize(cont)))
+        print('Altura del arbol: ' + str(controller.indexHeight(cont)))
+        print('Elementos en el arbol: ' + str(controller.indexSize(cont)))
+        print('Menor Llave: ' + str(controller.minKey(cont)))
+        print('Mayor Llave: ' + str(controller.maxKey(cont)))
 
     elif int(inputs[0]) == 3:
-        print("\nBuscando crimenes en un rango de fechas: ")
-
-
-    elif int(inputs[0]) == 4:
-        print("\nRequerimiento No 1 del reto 3: ")
-
+        initialDate = input("\nIngrese la fecha (YYYY-MM-DD): ")
+        print("\nBuscando accidentes de " + initialDate + "....")
+        severity1 = int(controller.getAccidentsBySeverity(cont, initialDate, '1'))
+        severity2 = int(controller.getAccidentsBySeverity(cont, initialDate, '2'))
+        severity3 = int(controller.getAccidentsBySeverity(cont, initialDate, '3'))
+        severity4 = int(controller.getAccidentsBySeverity(cont, initialDate, '4'))
+        totalseverities = severity1+severity2+severity3+severity4
+        print("\nEn la fecha " + initialDate + " hubo " + str(totalseverities) + " accidentes. "
+        "Hubo " + str(severity1) + " de severidad 1, " + str(severity2) + " de severidad 2, " + str(severity3) + " de severidad 3, " + str(severity4) +" de severidad 4. ")
     else:
         sys.exit(0)
 sys.exit(0)
+
+crimefile = 'crime-utf8.csv'
+
+# ___________________________________________________
+#  Menu principal
+# ___________________________________________________
+
+
+
+
+
