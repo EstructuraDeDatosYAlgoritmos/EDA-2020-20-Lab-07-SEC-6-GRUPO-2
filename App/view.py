@@ -37,7 +37,7 @@ operación seleccionada.
 #  Ruta a los archivos
 # ___________________________________________________
 
-accidentsfile = 'us_accidents_small.csv'
+accidentsfile = 'US_Accidents_Dec19.csv'
 
 # ___________________________________________________
 #  Menu principal
